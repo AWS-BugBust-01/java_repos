@@ -1,8 +1,0 @@
-{
-  "StartAt": "InitialState",
-  "States": {
-    "InitialState": {
-      "Type": "Succeed"
-    }
-  }
-}
