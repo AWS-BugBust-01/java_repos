@@ -1,0 +1,22 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: AWS CloudTrail Processing Library for Java
+Bundle-SymbolicName: com.amazonaws.awscloudtrailprocessinglibrary;singleton:=true
+Bundle-Version: 1.4.0
+Bundle-Vendor: Amazon Technologies, Inc
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: com.amazonaws.sdk;bundle-version="1.11.830"
+Export-Package: com.amazonaws.services.cloudtrail,
+ com.amazonaws.services.cloudtrail.processinglibrary,
+ com.amazonaws.services.cloudtrail.processinglibrary.configuration,
+ com.amazonaws.services.cloudtrail.processinglibrary.exceptions,
+ com.amazonaws.services.cloudtrail.processinglibrary.factory,
+ com.amazonaws.services.cloudtrail.processinglibrary.impl,
+ com.amazonaws.services.cloudtrail.processinglibrary.interfaces,
+ com.amazonaws.services.cloudtrail.processinglibrary.manager,
+ com.amazonaws.services.cloudtrail.processinglibrary.model,
+ com.amazonaws.services.cloudtrail.processinglibrary.model.internal,
+ com.amazonaws.services.cloudtrail.processinglibrary.progress,
+ com.amazonaws.services.cloudtrail.processinglibrary.reader,
+ com.amazonaws.services.cloudtrail.processinglibrary.serializer,
+ com.amazonaws.services.cloudtrail.processinglibrary.utils

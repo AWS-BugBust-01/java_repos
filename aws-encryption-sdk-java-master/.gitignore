@@ -1,0 +1,17 @@
+eclipse-bin/
+target/
+.settings/
+.project
+.classpath
+/bin/
+.idea/
+*.iml
+/.history
+/.DS_Store
+/specification_compliance_report.html
+
+## semantic-release
+package-lock.json
+package.json
+node_modules/
+pom.xml.versionsBackup

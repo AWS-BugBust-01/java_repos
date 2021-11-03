@@ -1,0 +1,63 @@
+#!/usr/bin/env node
+// Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+// This is done in a node script for 2 reasons
+// 1. Potability: I will need to run this in windows
+// 2. Errors. If the main command fails, the script needs to clean up
+// but and exit with this error.
+// this _can_ be done from bash or shell,
+// but now the portability problems loom large.
+
+const { spawn } = require('child_process')
+const pipeStdIo = { stdio: [process.stdin, process.stdout, process.stderr] }
+
+// I am assuming that you used `local_verdaccio_publish`
+// But either way,
+// this is to facilitate running `npx`
+// and interacting with a local verdaccio server
+// So... I need a running server
+const verdaccio = spawn('npx', ['verdaccio', '-c', 'verdaccio/config.yaml'], pipeStdIo)
+  .on('error', e => {
+    throw e
+  })
+
+const args = [
+  '--userconfig', 'verdaccio/npmrc',
+  // In npx v6 ignore-existing let you install the latest version
+  // regardless of what was installed locally.
+  // In npx v7 this is disable and if you need to install anything
+  // then --yes is *required*
+  '--ignore-existing', '--yes',
+  // This is **very** important, (npx ~v6)
+  // without this, npx may mask error codes.
+  // In testing it was possible to have errors in the npx command
+  // but the spawned process here did not exit with a non-zero exit code.
+  // See `execCommand` in `libnpx` for specifics
+  // In npx v7 this option is deprecated
+  '--always-spawn',
+  // Yes, this is dangerous.
+  // But I'm trying to replicate _just running npx_
+  // So if you get here, you should have had access to run npx anyway.
+  ...process.argv.slice(2)
+]
+
+spawn('npx', args, {
+    // npx v7 will *not* install from any repository if any version exists locally.
+    cwd: 'verdaccio/integration',
+    // This instance of npx needs to target the verdaccio server
+    // so the env var that governs this needs to be updated.
+    // it is _possible_ for this value to already be set.
+    // if the command has been executed from an npm script for example
+    env: { ...process.env, npm_config_registry: 'http://localhost:4873/'},
+    ...pipeStdIo
+  })
+  .on('close', (code) => {
+    // Kill the background verdaccio server
+    verdaccio.kill()
+
+    // If this command had an error,
+    // we need to forward this.
+    // Otherwise the entire CI build may think that things succeeded.
+    if (code !== 0) throw Error(`Exit code: ${code}`)
+  })

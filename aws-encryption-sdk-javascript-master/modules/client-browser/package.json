@@ -1,0 +1,43 @@
+{
+  "name": "@aws-crypto/client-browser",
+  "keywords": [
+    "cryptography",
+    "crypto",
+    "encryption",
+    "envelope encryption",
+    "client side encryption",
+    "CSE",
+    "aws"
+  ],
+  "version": "3.0.2",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "lint": "run-s lint-*",
+    "lint-eslint": "eslint src/*.ts",
+    "lint-prettier": "prettier -c src/*.ts"
+  },
+  "author": {
+    "name": "AWS Crypto Tools Team",
+    "email": "aws-cryptools@amazon.com",
+    "url": "https://aws.amazon.com/javascript/"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-crypto/caching-materials-manager-browser": "file:../caching-materials-manager-browser",
+    "@aws-crypto/decrypt-browser": "file:../decrypt-browser",
+    "@aws-crypto/encrypt-browser": "file:../encrypt-browser",
+    "@aws-crypto/kms-keyring-browser": "file:../kms-keyring-browser",
+    "@aws-crypto/material-management-browser": "file:../material-management-browser",
+    "@aws-crypto/raw-aes-keyring-browser": "file:../raw-aes-keyring-browser",
+    "@aws-crypto/raw-rsa-keyring-browser": "file:../raw-rsa-keyring-browser",
+    "@aws-crypto/web-crypto-backend": "file:../web-crypto-backend",
+    "tslib": "^2.2.0"
+  },
+  "sideEffects": false,
+  "main": "./build/main/src/index.js",
+  "module": "./build/module/src/index.js",
+  "types": "./build/main/src/index.d.ts",
+  "files": [
+    "build/**/src/*"
+  ]
+}

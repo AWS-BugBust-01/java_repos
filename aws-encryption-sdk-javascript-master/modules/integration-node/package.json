@@ -1,0 +1,36 @@
+{
+  "name": "@aws-crypto/integration-node",
+  "version": "3.0.3",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "lint": "run-s lint-*",
+    "lint-eslint": "eslint src/*.ts test/*.ts",
+    "lint-prettier": "prettier -c src/*.ts test/*.ts",
+    "test": "npm run lint && npm run build && node ./build/main/index.js",
+    "integration_node": "npx ."
+  },
+  "author": {
+    "name": "AWS Crypto Tools Team",
+    "email": "aws-cryptools@amazon.com",
+    "url": "https://aws.amazon.com/javascript/"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-crypto/client-node": "file:../client-node",
+    "@aws-crypto/integration-vectors": "file:../integration-vectors",
+    "@types/got": "^9.6.9",
+    "@types/stream-to-promise": "^2.2.0",
+    "@types/yargs": "^15.0.3",
+    "got": "^11.8.0",
+    "stream-to-promise": "^3.0.0",
+    "tslib": "^2.3.0",
+    "yargs": "^17.1.0"
+  },
+  "sideEffects": false,
+  "main": "./build/main/src/index.js",
+  "types": "./build/main/src/index.d.ts",
+  "bin": "./build/main/src/cli.js",
+  "files": [
+    "build/**/src/*"
+  ]
+}

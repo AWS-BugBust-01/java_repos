@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "target": "esnext",
+    "outDir": "build/module",
+    "module": "esnext",
+    "allowSyntheticDefaultImports": true
+  },
+  "exclude": ["node_modules/**"],
+  "references": [
+    {
+      "path": "../client-browser/tsconfig.module.json"
+    },
+    { "path": "../integration-vectors/tsconfig.module.json" }
+  ]
+}

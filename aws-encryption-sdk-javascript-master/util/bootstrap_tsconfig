@@ -1,0 +1,36 @@
+#!/usr/bin/env node
+// Copyright Amazon.com Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+/* This file is to help line up the formal conditions listed in source with tests.
+  * I look for `sourceGrep` and `testGrep` make make sure that the conditions found,
+  * are in both sets.
+  */
+
+const { writeFileSync } = require('fs')
+const { exec } = require('child_process')
+const { promisify } = require('util')
+const execAsync = promisify(exec)
+
+const lernaLs = 'npx lerna la'
+
+execAsync(lernaLs)
+  .then(clean)
+  .then(references => ({
+    extends: './modules/tsconfig.settings.json',
+    files: [],
+    references
+  }))
+  .then(tsconfig => {
+    writeFileSync('./tsconfig.json', JSON.stringify(tsconfig, null, '  '))
+    const references = tsconfig.references.map(({path}) => ({path: path + '/tsconfig.module.json'}))
+    writeFileSync('./tsconfig.module.json', JSON.stringify({...tsconfig, references}, null, '  '))
+  })
+
+const namespace = '@aws-crypto/'
+function clean ({ stdout, stderr }) {
+  return stdout.split('\n')
+    .filter(l => l.startsWith(namespace))
+    .map(l => l.split(' ').shift().split(namespace).pop())
+    .map(name => ({ path: `modules/${name}` }))
+}

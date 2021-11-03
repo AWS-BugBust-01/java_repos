@@ -1,0 +1,193 @@
+[
+  {
+    "description": "Operation with explicit payload structure in output is unmarshalled correctly",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "body": "{\"StringMember\": \"foo\"}"
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "OperationWithExplicitPayloadStructure"
+    },
+    "then": {
+      "deserializedAs": {
+        "PayloadMember": {
+          "StringMember": "foo"
+        }
+      }
+    }
+  },
+  {
+    "description": "Operation with streaming payload in output is unmarshalled correctly",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "body": "contents"
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "StreamingOutputOperation"
+    },
+    "then": {
+      "deserializedAs": {
+        "StreamingMember": "contents"
+      }
+    }
+  },
+  {
+    "description": "Base 64 string header with JSON trait is decoded, unquoted string preserved (invalid json)",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Encoded-Header": "dG9EZWNvZGU="
+        },
+        "body": "{\"JsonValueMember\":\"dontDecode\"}"
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "JsonValuesOperation"
+    },
+    "then": {
+      "deserializedAs": {
+        "JsonValueHeaderMember": "toDecode",
+        "JsonValueMember": "dontDecode"
+      }
+    }
+  },
+  {
+    "description": "Base 64 string header with JSON trait is decoded, quoted string preserved (valid json)",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Encoded-Header": "InRvRGVjb2RlIg=="
+        },
+        "body": "{\"JsonValueMember\":\"dontDecode\"}"
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "JsonValuesOperation"
+    },
+    "then": {
+      "deserializedAs": {
+        "JsonValueHeaderMember": "\"toDecode\"",
+        "JsonValueMember": "dontDecode"
+      }
+    }
+  },
+  {
+    "description": "Base 64 string header with JSON trait is decoded, quoted json object preserved",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "Encoded-Header": "IntcImxpc3RcIjpbMSwyLDNdLFwibWFwXCI6e1wiZmlyc3RcIjpcInZhbHVlMVwiLFwic2Vjb25kXCI6XCJ2YWx1ZTJcIn19Ig=="
+        },
+        "body": "{\"JsonValueMember\":\"dontDecode\"}"
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "JsonValuesOperation"
+    },
+    "then": {
+      "deserializedAs": {
+        "JsonValueHeaderMember": "\"{\\\"list\\\":[1,2,3],\\\"map\\\":{\\\"first\\\":\\\"value1\\\",\\\"second\\\":\\\"value2\\\"}}\"",
+        "JsonValueMember": "dontDecode"
+      }
+    }
+  },
+  {
+    "description": "ISO 8601 Timestamp in header unmarshalled correctly",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "x-amz-iso-timestamp": "2014-04-29T18:30:38Z"
+        }
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "MembersInHeaders"
+    },
+    "then": {
+      "deserializedAs": {
+        "IsoTimestampMember": 1398796238000
+      }
+    }
+  },
+  {
+    "description": "Integer bound to HTTP status code is unmarshalled correctly",
+    "given": {
+      "response": {
+        "status_code": 201
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "StatusCodeInOutputOperation"
+    },
+    "then": {
+      "deserializedAs": {
+        "StatusCodeMember": 201
+      }
+    }
+  },
+  {
+    "description": "Members declared to be in the query parameters or path on response are unmarshalled from the payload",
+    "given": {
+      "input": {
+        "PathParam": "param"
+      },
+      "response": {
+        "status_code": 200,
+        "body": "{\"PathParam\": \"Found PathParam in the payload! Yay!\", \"QueryParamOne\":\"Found QueryParamOne in the payload! Yay!\"}"
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "MultiLocationOperation"
+    },
+    "then": {
+      "deserializedAs": {
+        "PathParam": "Found PathParam in the payload! Yay!",
+        "QueryParamOne": "Found QueryParamOne in the payload! Yay!"
+      }
+    }
+  },
+  {
+    "description": "ListOfStrings in multi-valued header is unmarshalled correctly",
+    "given": {
+      "response": {
+        "status_code": 200,
+        "headers": {
+          "x-amz-string": "singleValue",
+          "x-amz-string-list": [
+            "listValueOne",
+            "listValueTwo"
+          ]
+        }
+      }
+    },
+    "when": {
+      "action": "unmarshall",
+      "operation": "MembersInHeaders"
+    },
+    "then": {
+      "deserializedAs": {
+        "StringMember": "singleValue",
+        "ListOfStringsMember": [
+          "listValueOne",
+          "listValueTwo"
+        ]
+      }
+    }
+  }
+]

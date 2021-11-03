@@ -1,0 +1,31 @@
+{
+  "name": "@aws-crypto/example-node",
+  "version": "3.0.3",
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "build": "tsc -b tsconfig.json && tsc -b tsconfig.module.json",
+    "lint": "run-s lint-*",
+    "lint-eslint": "eslint src/*.ts test/**/*.ts",
+    "lint-prettier": "prettier -c src/*.ts test/**/*.ts",
+    "mocha": "mocha --require ts-node/register test/**/*test.ts",
+    "test": "npm run lint && npm run coverage",
+    "coverage": "nyc -e .ts npm run mocha"
+  },
+  "author": {
+    "name": "AWS Crypto Tools Team",
+    "email": "aws-cryptools@amazon.com",
+    "url": "https://aws.amazon.com/javascript/"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-crypto/client-node": "file:../client-node",
+    "tslib": "^2.2.0"
+  },
+  "sideEffects": false,
+  "main": "./build/main/src/index.js",
+  "module": "./build/module/src/index.js",
+  "types": "./build/main/src/index.d.ts",
+  "files": [
+    "build/**/src/*"
+  ]
+}

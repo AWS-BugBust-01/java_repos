@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "default": {
+    "fixed_target": 1,
+    "rate": 0.05
+  },
+  "rules": [
+    // Example path-based rule below. Rules are evaluated in array order, the default rule will be used if none match the incoming request.
+    // {
+    //    "description": "Player moves.",
+    //    "host ": "*",
+    //    "http_method": "*",
+    //    "url_path": "/api/move/*",
+    //    "fixed_target": 0,
+    //    "rate": 0.05
+    //}
+  ]
+}

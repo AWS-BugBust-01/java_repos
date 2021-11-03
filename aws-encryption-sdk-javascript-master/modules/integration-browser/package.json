@@ -1,0 +1,54 @@
+{
+  "name": "@aws-crypto/integration-browser",
+  "version": "3.0.2",
+  "scripts": {
+    "build": "tsc -b tsconfig.json",
+    "lint": "run-s lint-*",
+    "lint-eslint": "eslint src/*.ts",
+    "lint-prettier": "prettier -c src/*.ts",
+    "karma": "karma start karma.conf.js",
+    "build_fixtures": "npx .",
+    "test": "npm run lint && npm run karma"
+  },
+  "author": {
+    "name": "AWS Crypto Tools Team",
+    "email": "aws-cryptools@amazon.com",
+    "url": "https://aws.amazon.com/javascript/"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@aws-crypto/client-browser": "file:../client-browser",
+    "@aws-crypto/integration-vectors": "file:../integration-vectors",
+    "@aws-sdk/credential-provider-node": "^3.11.0",
+    "@aws-sdk/karma-credential-loader": "^3.11.0",
+    "@aws-sdk/util-base64-browser": "^3.10.0",
+    "@aws-sdk/util-utf8-browser": "3.23.0",
+    "@trust/keyto": "^1.0.1",
+    "@types/got": "^9.6.9",
+    "@types/stream-to-promise": "^2.2.0",
+    "@types/yargs": "^17.0.1",
+    "buffer": "^6.0.3",
+    "got": "^11.8.0",
+    "jasmine-core": "^3.5.0",
+    "karma": "^6.3.4",
+    "karma-chrome-launcher": "^3.1.0",
+    "karma-jasmine": "^4.0.1",
+    "karma-json-fixtures-preprocessor": "0.0.6",
+    "karma-parallel": "^0.3.1",
+    "karma-webpack": "^5.0.0",
+    "null-loader": "^4.0.1",
+    "stream-to-promise": "^3.0.0",
+    "tslib": "^2.3.0",
+    "webpack": "^5.42.0",
+    "yargs": "^17.0.1"
+  },
+  "sideEffects": false,
+  "main": "./build/main/src/index.js",
+  "module": "./build/module/src/index.js",
+  "types": "./build/main/src/index.d.ts",
+  "bin": "./build/main/src/cli.js",
+  "files": [
+    "build/**/src/*",
+    "karma.conf.js"
+  ]
+}

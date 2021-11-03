@@ -1,0 +1,24 @@
+# Remove .DS_Store
+.DS_Store
+**/.DS_Store
+
+# Ignore Gradle project-specific cache directory
+.gradle
+
+# Ignore Gradle build output directory
+build
+target
+
+# Dependency reduced POMs for building local dependencies
+dependency-reduced-pom.xml
+
+# IDEA stuffs
+*.iml
+.idea
+.settings/
+.project
+.classpath
+
+# Don't include personal scripts
+sample/*.sh
+lib

@@ -1,0 +1,49 @@
+# Vim swap files
+*~
+*.swp
+*.swo
+
+# OS Artifacts
+.DS_Store
+
+# Artifacts
+build
+node_modules
+package.json.decrypt
+
+# VSCode
+.vscode
+.history
+
+# JetBrains
+.idea
+
+# nyc/code coverage
+.nyc_output
+.karma_output
+coverage
+
+# symlink to test vectors
+/modules/integration-node/fixtures
+/modules/integration-browser/fixtures
+
+# Lerna
+/lerna-debug.log
+
+# TypeScript config is built by ./util/bootstrap_tsconfig
+/tsconfig.json
+/tsconfig.module.json
+package.json.decrypt
+
+# verdaccio
+/verdaccio/storage
+/storage
+
+# local npx cache
+/verdaccio/.npx
+/specification_compliance_report.html
+
+# These version files are build by genversion
+# they track the package.json version
+/modules/kms-keyring-browser/src/version.ts
+/modules/kms-keyring-node/src/version.ts
