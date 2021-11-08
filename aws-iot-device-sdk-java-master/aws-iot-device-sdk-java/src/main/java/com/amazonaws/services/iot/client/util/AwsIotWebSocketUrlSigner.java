@@ -453,7 +453,7 @@ public class AwsIotWebSocketUrlSigner {
             byte[] data = stringData.getBytes(UTF8);
             return mac.doFinal(data);
         } catch (Exception e) {
-            throw new AWSIotException("Unable to calculate a request signature: " + e.getMessage());
+            throw new AWSIotException("Unable to calculate a request signature: " + e.getMessage(), e);
         }
     }
 
