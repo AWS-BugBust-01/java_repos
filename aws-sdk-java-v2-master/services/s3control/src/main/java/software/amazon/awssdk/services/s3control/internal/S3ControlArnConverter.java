@@ -76,7 +76,7 @@ public final class S3ControlArnConverter implements ArnConverter<S3Resource> {
                                                     .orElseThrow(() -> new IllegalArgumentException("resource type cannot be "
                                                                                                     + "null"));
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Unknown outpost ARN type '" + outpostSubresource.resourceType() + "'");
+            throw new IllegalArgumentException("Unknown outpost ARN type '" + outpostSubresource.resourceType() + "'", e);
         }
 
         String outpostId = intermediateOutpostResource.outpostId();
