@@ -316,9 +316,6 @@ public class ShadowSample {
                     changeShadowValue(newValue).get();
                     gotResponse.get();
                 }
-
-                CompletableFuture<Void> disconnected = connection.disconnect();
-                disconnected.get();
             }
         } catch (CrtRuntimeException | InterruptedException | ExecutionException ex) {
             System.out.println("Exception encountered: " + ex.toString());
