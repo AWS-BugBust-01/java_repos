@@ -227,8 +227,6 @@ public final class EventStreamAsyncResponseTransformer<ResponseT, EventT>
                 log.debug(() -> getLogPrefix() + "Decoded a message of an unknown type, it will be dropped: " + message);
                 return emptyList();
             }
-        } catch (Error | SdkException e) {
-            throw e;
         } catch (Throwable e) {
             throw SdkClientException.builder().cause(e).build();
         }
