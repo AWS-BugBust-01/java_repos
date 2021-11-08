@@ -27,6 +27,7 @@ import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class PubSub {
 
@@ -332,7 +333,7 @@ public class PubSub {
                 int count = 0;
                 while (count++ < messagesToPublish) {
                     CompletableFuture<Integer> published = connection.publish(new MqttMessage(topic, message.getBytes(), QualityOfService.AT_LEAST_ONCE, false));
-                    published.get();
+                    published.get(10, TimeUnit.SECONDS);
                     Thread.sleep(1000);
                 }
                 
