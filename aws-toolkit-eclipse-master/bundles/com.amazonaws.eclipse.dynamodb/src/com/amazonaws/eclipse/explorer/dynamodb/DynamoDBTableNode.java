@@ -122,7 +122,7 @@ public class DynamoDBTableNode extends ExplorerNode {
                 @Override
                 public void run() {
                     /* Show the warning that the table is CREATING/DELETING/UPDATING */
-                    MessageDialog dialog = new MessageDialog(
+                    try (MessageDialog dialog = new MessageDialog(
                             Display.getCurrent().getActiveShell(),
                             "Cannot open this table",
                             AwsToolkitCore.getDefault()
@@ -130,8 +130,9 @@ public class DynamoDBTableNode extends ExplorerNode {
                                     .get(AwsToolkitCore.IMAGE_AWS_ICON),
                             "Cannot open this table(" + tableName + "), since it is in the status of " + tableStatus + ".",
                             MessageDialog.ERROR,
-                            new String[] { "OK" }, 0);
-                    dialog.open();
+                            new String[] { "OK" }, 0)) {
+                        dialog.open();
+                    }                    
                 }
             });
         }
