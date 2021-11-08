@@ -47,7 +47,7 @@ public class BasicPollQueueInfo implements ProgressInfo{
 
     @Override
     public String toString() {
-        return String.format("{isSuccess: %s, polledMessageCount: %s}", isSuccess, polledMessageCount);
+        return String.format("{isSuccess: %s, polledMessageCount: %d}", isSuccess, polledMessageCount);
     }
 
 }
