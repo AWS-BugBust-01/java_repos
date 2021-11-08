@@ -33,6 +33,7 @@ public class HelloWorld {
     }
 }
 
+// test PR
 class PublishHelloWorld extends TimerTask {
     private IotDataClient iotDataClient = new IotDataClient();
     private String publishMessage = String.format("Hello world! Sent from Greengrass Core running on platform: %s-%s using Java", System.getProperty("os.name"), System.getProperty("os.version"));
