@@ -26,7 +26,7 @@ public class DependencyFactory {
 #if ($region == 'null')
                        .region(Region.of(System.getenv(SdkSystemSetting.AWS_REGION.environmentVariable())))
 #else
-                       .region(Region.${regionEnum})
+                       .region(Region.${regionEnum}))
 #end
                        .httpClientBuilder(${httpClientClassName}.builder())
                        .build();
