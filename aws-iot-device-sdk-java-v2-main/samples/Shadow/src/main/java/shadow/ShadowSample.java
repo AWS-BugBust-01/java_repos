@@ -289,8 +289,8 @@ public class ShadowSample {
                                 requestGetShadow,
                                 QualityOfService.AT_LEAST_ONCE,
                                 ShadowSample::onGetShadowRejected);
-                subscribedToGetShadowAccepted.get();
-                subscribedToGetShadowRejected.get();
+                subscribedToGetShadowAccepted.get(15, TimeUnit.SECONDS);
+                subscribedToGetShadowRejected.get(15, TimeUnit.SECONDS);
 
                 gotResponse = new CompletableFuture<>();
 
