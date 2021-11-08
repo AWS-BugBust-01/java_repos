@@ -56,17 +56,18 @@ public class AddMessageAction extends Action {
 
     @Override
     public void run() {
-        AddMessageDialog addMessageDialog = new AddMessageDialog();
-        if (addMessageDialog.open() >= 0) {
-            SendMessageRequest sendMessageRequest = new SendMessageRequest(queueUrl, addMessageDialog.getMessage());
-            if (addMessageDialog.getDelay() > -1) {
-                sendMessageRequest.setDelaySeconds(addMessageDialog.getDelay());
-            }
+        try (AddMessageDialog addMessageDialog = new AddMessageDialog()) {
+            if (addMessageDialog.open() >= 0) {
+                SendMessageRequest sendMessageRequest = new SendMessageRequest(queueUrl, addMessageDialog.getMessage());
+                if (addMessageDialog.getDelay() > -1) {
+                    sendMessageRequest.setDelaySeconds(addMessageDialog.getDelay());
+                }
 
-            sqs.sendMessage(sendMessageRequest);
+                sqs.sendMessage(sendMessageRequest);
 
-            if (refreshable != null) {
-                refreshable.refreshData();
+                if (refreshable != null) {
+                    refreshable.refreshData();
+                }
             }
         }
     }
