@@ -264,7 +264,7 @@ public class UpdateEnvironmentJob extends Job {
                 utils.createNewEnvironment(versionLabel);
             } catch (AmazonClientException ace) {
                 throw new CoreException(new Status(IStatus.ERROR, ElasticBeanstalkPlugin.PLUGIN_ID,
-                        "Unable to create new environment: " + ace.getMessage(), ace));
+                        "Unable to create new environment: " + ace.getMessage(), ace), ace);
             }
         }
     }
