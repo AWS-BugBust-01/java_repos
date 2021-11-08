@@ -173,6 +173,7 @@ public class DeployProjectToOpsworksWizard extends Wizard {
         } catch (InterruptedException e) {
             OpsWorksPlugin.getDefault().reportException(
                     "Unexpected InterruptedException during deployment", e.getCause());
+            Thread.currentThread().interrupt();
         }
 
         return true;
