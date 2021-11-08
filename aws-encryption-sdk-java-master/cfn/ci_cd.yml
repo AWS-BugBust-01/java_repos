@@ -37,7 +37,7 @@ Resources:
   CodeBuildProjectCI:
     Type: "AWS::CodeBuild::Project"
     Properties:
-      Name: "${ProjectName}-CI"
+      Name: ${ProjectName}-CI
       Description: !Sub "CI for the Java ESDK"
       Source:
         Location: !Ref SourceLocation
