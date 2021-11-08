@@ -97,9 +97,9 @@ class MetadataUtils {
         }
         try {
             return os.toString(StandardCharsets.UTF_8.name());
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException("UTF-8 not supported can't happen.");
-        }
+        } catch (Throwable t) {
+     throw new ServletException("Error: " + t.getMessage(), t);
+}
     }
 
     static void readTo(@Nullable InputStream is, ByteArrayOutputStream os) throws IOException {

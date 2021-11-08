@@ -84,6 +84,8 @@ public class SNSActionProvider extends CommonActionProvider {
 
         @Override
         public void run() {
+            
+         try{ 
             Dialog dialog = newConfirmationDialog("Delete selected topics?", "Are you sure you want to delete the selected Amazon SNS topics?");
             if (dialog.open() != 0) return;
 
@@ -97,6 +99,9 @@ public class SNSActionProvider extends CommonActionProvider {
             }
 
             ContentProviderRegistry.refreshAllContentProviders();
+        } finally {
+             dialog.close();
+           }
         }
     }
 

@@ -219,19 +219,8 @@ public class ServiceAPIUtils {
                             );
 
             List<String> instanceIds = result.getInstancesList();
-
-            if (instanceIds != null) {
-                for (String instanceId : instanceIds) {
-                    allDeploymentInstances.add(client.getDeploymentInstance(
-                            new GetDeploymentInstanceRequest()
-                                    .withDeploymentId(deploymentId)
-                                    .withInstanceId(instanceId)
-                                    )
-                            .getInstanceSummary());
-                }
-            }
-
-            nextToken = result.getNextToken();
+            allDeploymentInstances.add(client.BatchGetDeploymentInstances( deploymentId,instanceIds).getInstanceSummary());
+           nextToken = result.getNextToken();
 
         } while (nextToken != null);
 

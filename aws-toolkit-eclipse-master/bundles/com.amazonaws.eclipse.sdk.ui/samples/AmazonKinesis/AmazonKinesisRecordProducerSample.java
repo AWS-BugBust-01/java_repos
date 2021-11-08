@@ -128,18 +128,19 @@ public class AmazonKinesisRecordProducerSample {
         System.out.printf("Putting records in stream : %s until this application is stopped...\n", myStreamName);
         System.out.println("Press CTRL-C to stop.");
         // Write records to the stream until this program is aborted.
+        PutRecordsRequest putRecordsRequest  = new PutRecordsRequest();
+        putRecordsRequest.setStreamName(myStreamName);
+        List <PutRecordsRequestEntry> putRecordsRequestEntryList  = new ArrayList<>();        
         while (true) {
             long createTime = System.currentTimeMillis();
             PutRecordRequest putRecordRequest = new PutRecordRequest();
-            putRecordRequest.setStreamName(myStreamName);
             putRecordRequest.setData(ByteBuffer.wrap(String.format("testData-%d", createTime).getBytes()));
-            putRecordRequest.setPartitionKey(String.format("partitionKey-%d", createTime));
-            PutRecordResult putRecordResult = kinesis.putRecord(putRecordRequest);
-            System.out.printf("Successfully put record, partition key : %s, ShardID : %s, SequenceNumber : %s.\n",
-                    putRecordRequest.getPartitionKey(),
-                    putRecordResult.getShardId(),
-                    putRecordResult.getSequenceNumber());
+            putRecordRequest.setPartitionKey(String.format("partitionKey-%d", createTime));            
+            putRecordsRequestEntryList.add(putRecordRequest); 
         }
+        putRecordsRequest.setRecords(putRecordsRequestEntryList);
+        PutRecordResult putRecordResult = kinesis.putRecords(putRecordsRequest);
+        System.out.println("Put Result" + putRecordsResult);       
     }
 
     private static void waitForStreamToBecomeAvailable(String myStreamName) throws InterruptedException {
