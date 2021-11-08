@@ -210,7 +210,7 @@ public final class NettyNioAsyncHttpClient implements SdkAsyncHttpClient {
             Thread.currentThread().interrupt();
             throw new RuntimeException(e);
         } catch (TimeoutException e) {
-            log.error(String.format("Shutting down Netty EventLoopGroup did not complete within %s seconds",
+            log.error(String.format("Shutting down Netty EventLoopGroup did not complete within %d seconds",
                                     EVENTLOOP_SHUTDOWN_FUTURE_TIMEOUT_SECONDS));
         }
     }
