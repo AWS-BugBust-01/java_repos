@@ -396,7 +396,7 @@ public abstract class AWSSecretsManagerDriver implements Driver {
                 unwrappedUrl = constructUrlFromEndpointPortDatabase(endpoint, port, dbname);
             } catch (IOException e) {
                 // Most likely to occur in the event that the data is not JSON. This is more of a user error.
-                throw new RuntimeException(INVALID_SECRET_STRING_JSON);
+                throw new RuntimeException(INVALID_SECRET_STRING_JSON, e);
             }
         }
 
@@ -438,4 +438,3 @@ public abstract class AWSSecretsManagerDriver implements Driver {
         return getWrappedDriver().jdbcCompliant();
     }
 }
-
