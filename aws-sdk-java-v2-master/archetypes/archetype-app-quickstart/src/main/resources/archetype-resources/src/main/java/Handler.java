@@ -8,8 +8,8 @@ public class Handler {
     private final ${serviceClientClassName} ${serviceClientVariable}Client;
 
     public Handler() {
-        ${serviceClientVariable}Client = DependencyFactory.${serviceClientVariable}Client();
-    }
+        ${serviceClientVariable}Client = DependencyFactory.${serviceClientVariable}Client()
+    };
 
     public void sendRequest() {
         // TODO: invoking the api calls using ${serviceClientVariable}Client.
