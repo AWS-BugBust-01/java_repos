@@ -266,7 +266,10 @@ public class FunctionLogsTable extends Composite {
                 String text = CloudWatchLogsUtils.convertLogEventsToString(events);
 
                 File file = File.createTempFile(logGroupName, ".txt");
-                IOUtils.copy(new StringInputStream(text), new FileOutputStream(file));
+                try (final StringInputStream inStream = new StringInputStream(text);
+                     final FileOutputStream = new FileOutputStream(file)) {
+                    IOUtils.copy(inStream, outStream);
+                }
                 IFileStore fileStore = EFS.getLocalFileSystem().getStore(file.toURI());
                 IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
                 IDE.openEditorOnFileStore( page, fileStore );
