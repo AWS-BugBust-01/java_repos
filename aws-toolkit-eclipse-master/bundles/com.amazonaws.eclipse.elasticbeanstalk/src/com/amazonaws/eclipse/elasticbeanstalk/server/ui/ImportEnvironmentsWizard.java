@@ -247,17 +247,6 @@ public class ImportEnvironmentsWizard extends Wizard {
      */
     private List<EnvironmentDescription> getExistingEnvironments(Region region) {
         List<EnvironmentDescription> filtered = new ArrayList<>();
-
-        AWSElasticBeanstalk client = AwsToolkitCore.getClientFactory().getElasticBeanstalkClientByEndpoint(
-                region.getServiceEndpoints().get(ServiceAbbreviations.BEANSTALK));
-        List<EnvironmentDescription> environments = client.describeEnvironments().getEnvironments();
-
-        // Only list the active environments
-        for ( EnvironmentDescription env : environments ) {
-            if ( !(env.getStatus().equals(EnvironmentStatus.Terminated.toString()) || env.getStatus().equals(
-                    EnvironmentStatus.Terminating.toString())) )
-                filtered.add(env);
-        }
         return filtered;
     }
 
