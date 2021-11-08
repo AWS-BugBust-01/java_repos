@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class DiscoveryClient implements AutoCloseable {
     public static final String TLS_EXT_ALPN = "x-amzn-http-ca";
@@ -75,7 +76,7 @@ public class DiscoveryClient implements AutoCloseable {
                             responseComplete.complete(errorCode);
                         }})) {
                     stream.activate();
-                    responseComplete.get();
+                    responseComplete.get(10, TimeUnit.SECONDS);
                     if (stream.getResponseStatusCode() != 200) {
                         throw new RuntimeException(String.format("Error %s(%d); RequestId: %s",
                                 HTTP_HEADER_ERROR_TYPE, stream.getResponseStatusCode(), HTTP_HEADER_REQUEST_ID));
