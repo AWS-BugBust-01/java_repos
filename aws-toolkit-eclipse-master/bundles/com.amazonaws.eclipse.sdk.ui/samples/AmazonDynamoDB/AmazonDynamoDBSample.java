@@ -90,7 +90,7 @@ public class AmazonDynamoDBSample {
         }
         dynamoDB = AmazonDynamoDBClientBuilder.standard()
             .withCredentials(credentialsProvider)
-            .withRegion("us-west-2")
+            .withRegion(Regions.US_WEST_2)
             .build();
     }
 
