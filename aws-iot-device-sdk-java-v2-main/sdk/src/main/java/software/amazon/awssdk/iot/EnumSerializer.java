@@ -29,7 +29,7 @@ public class EnumSerializer<E> implements JsonSerializer<E>, JsonDeserializer<E>
         if (fromString == null) {
             Class<?> c = (Class<?>)typeOfEnum;
             for (Method m : c.getDeclaredMethods()) {
-                if (m.getName() == "fromString") {
+                if ("fromString".equals(m.getName())) {
                     fromString = m;
                     fromString.setAccessible(true);
                     break;
