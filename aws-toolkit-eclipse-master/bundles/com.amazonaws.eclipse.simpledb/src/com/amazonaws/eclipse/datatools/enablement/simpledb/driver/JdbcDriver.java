@@ -39,6 +39,15 @@ import com.amazonaws.services.simpledb.model.ListDomainsRequest;
 /**
  * Creates a JDBC wrapper infrastructure around AmazonSDB client library.
  */
+
+class InvalidAgeException  extends Exception  
+{  
+    public InvalidAgeException (String str)  
+    {  
+        // calling the constructor of parent Exception  
+        super(str);  
+    }  
+}  
 public class JdbcDriver implements Driver {
 
     private final Class<?> driverClass;
@@ -97,7 +106,7 @@ public class JdbcDriver implements Driver {
             se.initCause(e);
             throw se;
         } catch (SQLException e) {
-            throw e;
+            throw InvalidAgeException ("Invalid ");
         } catch (Exception e) {
             SQLException se = new SQLException(e.getLocalizedMessage(), "08001", 8001); //$NON-NLS-1$
             se.initCause(e);
