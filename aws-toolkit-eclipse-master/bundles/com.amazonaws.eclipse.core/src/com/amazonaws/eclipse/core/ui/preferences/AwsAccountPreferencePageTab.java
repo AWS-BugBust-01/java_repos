@@ -344,6 +344,8 @@ public class AwsAccountPreferencePageTab extends TabItem {
 
             @Override
             public void widgetSelected(SelectionEvent e) {
+                
+             try{
                 MessageDialog confirmRemoveTabDialog = new MessageDialog(
                         Display.getDefault().getActiveShell(),
                         "Remove all accounts for " + region.getName(),
@@ -356,7 +358,10 @@ public class AwsAccountPreferencePageTab extends TabItem {
                 if (confirmRemoveTabDialog.open() == 1) {
                     AwsAccountPreferencePageTab.this.dispose();
                 }
-
+              }  
+              finally {
+                confirmRemoveTabDialog.close();
+              }
             }
         });
     }
