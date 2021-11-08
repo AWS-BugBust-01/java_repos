@@ -167,13 +167,11 @@ public class EscrowedEncryptExample {
         // 3. Decrypt the file
         // To simplify the code, we omit the encryption context. Production code should always 
         // use an encryption context. For an example, see the other SDK samples.
-        final FileInputStream in = new FileInputStream(fileName + ".encrypted");
-        final FileOutputStream out = new FileOutputStream(fileName + ".deescrowed");
-        final CryptoOutputStream<?> decryptingStream = crypto.createDecryptingStream(escrowPriv, out);
-        IOUtils.copy(in, decryptingStream);
-        in.close();
-        decryptingStream.close();
-
+        try (final FileInputStream in = new FileInputStream(fileName + ".encrypted");
+             final FileOutputStream out = new FileOutputStream(fileName + ".deescrowed")) {
+            final CryptoOutputStream<?> decryptingStream = crypto.createDecryptingStream(escrowPriv, out);
+            IOUtils.copy(in, decryptingStream);
+        }
     }
 
     private static void generateEscrowKeyPair() throws GeneralSecurityException {
