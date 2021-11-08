@@ -201,7 +201,7 @@ public class RegionUtils {
             targetEndpointUrl = new URL(endpoint);
         } catch (MalformedURLException e) {
             throw new RuntimeException(
-                    "Unable to parse service endpoint: " + e.getMessage());
+                    "Unable to parse service endpoint: ", e);
         }
 
         String targetHost = targetEndpointUrl.getHost();
