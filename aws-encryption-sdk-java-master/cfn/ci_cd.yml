@@ -37,7 +37,7 @@ Resources:
   CodeBuildProjectCI:
     Type: "AWS::CodeBuild::Project"
     Properties:
-      Name: !Sub "${ProjectName}-CI"
+      Name: "${ProjectName}-CI"
       Description: !Sub "CI for the Java ESDK"
       Source:
         Location: !Ref SourceLocation
@@ -297,7 +297,7 @@ Resources:
       ManagedPolicyName: !Sub >-
         CrypotToolsKMSPolicy-${ProjectName}-${AWS::Region}-codebuild-${ProjectName}-service-role
       Path: /service-role/
-      PolicyDocument: !Sub |
+      PolicyDocument: 
         {
           "Version": "2012-10-17",
           "Statement": [
