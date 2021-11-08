@@ -34,7 +34,7 @@ public final class ApiCallAttemptTimeoutException extends SdkClientException {
 
     public static ApiCallAttemptTimeoutException create(long timeout) {
         return builder().message(String.format("HTTP request execution did not complete before the specified timeout "
-                                               + "configuration: %s millis", timeout))
+                                               + "configuration: %d millis", timeout))
                         .build();
     }
 
