@@ -308,7 +308,7 @@ public class FleetProvisioningSample {
                 new CreateKeysAndCertificateRequest(),
                 QualityOfService.AT_LEAST_ONCE);
 
-        publishKeys.get();
+        publishKeys.get(15, TimeUnit.SECONDS);
         System.out.println("Published to CreateKeysAndCertificate");
 
         waitForKeysRequest();
