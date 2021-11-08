@@ -54,7 +54,7 @@ public final class S3ControlArnConverter implements ArnConverter<S3Resource> {
                 arn.resource().resourceType().map(S3ControlResourceType::fromValue)
                    .orElseThrow(() -> new IllegalArgumentException("resource type cannot be null"));
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Unknown ARN type '" + arn.resource().resourceType() + "'");
+            throw new IllegalArgumentException("Unknown ARN type '" + arn.resource().resourceType() + "'", e);
         }
 
         switch (s3ResourceType) {
