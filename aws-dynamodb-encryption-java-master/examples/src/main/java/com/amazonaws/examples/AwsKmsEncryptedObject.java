@@ -109,17 +109,19 @@ public class AwsKmsEncryptedObject {
     final Map<String, AttributeValue> encrypted_record =
         ddbClient.getItem(EXAMPLE_TABLE_NAME, itemKey).getItem();
     System.out.println("Encrypted Record: " + encrypted_record);
-
-    // Encrypted record fields change as expected
-    assert encrypted_record.get(STRING_FIELD_NAME).getB()
-        != null; // the encrypted string is stored as bytes
-    assert encrypted_record.get(NUMBER_FIELD_NAME).getB()
-        != null; // the encrypted number is stored as bytes
-    assert !ByteBuffer.wrap(record.getSomeBinary())
-        .equals(encrypted_record.get(BINARY_FIELD_NAME).getB()); // the encrypted bytes have updated
-    assert record
-        .getLeaveMe()
-        .equals(encrypted_record.get(IGNORED_FIELD_NAME).getS()); // ignored field is left as is
+    
+    if(encrypted_record != null) {
+      // Encrypted record fields change as expected
+      assert encrypted_record.get(STRING_FIELD_NAME).getB()
+          != null; // the encrypted string is stored as bytes
+      assert encrypted_record.get(NUMBER_FIELD_NAME).getB()
+          != null; // the encrypted number is stored as bytes
+      assert !ByteBuffer.wrap(record.getSomeBinary())
+          .equals(encrypted_record.get(BINARY_FIELD_NAME).getB()); // the encrypted bytes have updated
+      assert record
+          .getLeaveMe()
+          .equals(encrypted_record.get(IGNORED_FIELD_NAME).getS()); // ignored field is left as is
+    }
 
     // Retrieve (and decrypt) it from DynamoDB
     DataPoJo decrypted_record = mapper.load(DataPoJo.class, "is this", 55);
