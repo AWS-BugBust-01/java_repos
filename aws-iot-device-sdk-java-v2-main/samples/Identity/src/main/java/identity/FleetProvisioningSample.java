@@ -346,7 +346,7 @@ public class FleetProvisioningSample {
                 QualityOfService.AT_LEAST_ONCE,
                 FleetProvisioningSample::onCreateCertificateFromCsrResponseAccepted);
 
-        csrSubscribedAccepted.get();
+        csrSubscribedAccepted.get(10, TimeUnit.SECONDS);
         System.out.println("Subscribed to CreateCertificateFromCsrAccepted");
 
         CompletableFuture<Integer> csrSubscribedRejected = iotIdentityClient.SubscribeToCreateCertificateFromCsrRejected(
