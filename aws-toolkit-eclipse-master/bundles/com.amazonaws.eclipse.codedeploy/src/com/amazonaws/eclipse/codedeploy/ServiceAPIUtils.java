@@ -219,6 +219,7 @@ public class ServiceAPIUtils {
                             );
 
             List<String> instanceIds = result.getInstancesList();
+            allDeploymentInstances.add(client.BatchGetDeploymentInstances( deploymentId,instanceIds).getInstanceSummary());
 
             if (instanceIds != null) {
                 for (String instanceId : instanceIds) {
