@@ -68,7 +68,7 @@ public class CreateSecurityGroupApp {
         // Create the AmazonEC2Client object so we can call various APIs.
         AmazonEC2 ec2 = AmazonEC2ClientBuilder.standard()
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion("us-west-2")
+            .withRegion(Regions.US_WEST_2)
             .build();
 
         // Create a new security group.
