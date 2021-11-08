@@ -55,7 +55,7 @@ class EC2MetadataFetcher {
             this.identityDocumentUrl = new URL(urlBase + "/latest/dynamic/instance-identity/document");
             this.tokenUrl = new URL(urlBase + "/latest/api/token");
         } catch (MalformedURLException e) {
-            throw new IllegalArgumentException("Illegal endpoint: " + endpoint);
+            throw new IllegalArgumentException("Illegal endpoint: " + endpoint, e);
         }
     }
 
