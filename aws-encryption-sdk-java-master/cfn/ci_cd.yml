@@ -297,7 +297,7 @@ Resources:
       ManagedPolicyName: !Sub >-
         CrypotToolsKMSPolicy-${ProjectName}-${AWS::Region}-codebuild-${ProjectName}-service-role
       Path: /service-role/
-      PolicyDocument: !Sub |
+      PolicyDocument:
         {
           "Version": "2012-10-17",
           "Statement": [
