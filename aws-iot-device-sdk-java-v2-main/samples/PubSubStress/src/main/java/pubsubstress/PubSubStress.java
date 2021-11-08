@@ -384,7 +384,7 @@ public class PubSubStress {
                     }
 
                     for (CompletableFuture<Integer> publishFuture : publishFutures) {
-                        publishFuture.get();
+                        publishFuture.get(15, TimeUnit.SECONDS);
                     }
 
                     System.out.println("zzzzz");
