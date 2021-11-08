@@ -149,20 +149,11 @@ public class InlineTaggingCodeSampleApp {
 
         // Create a tag request for requests.
         CreateTagsRequest createTagsRequest_requests = new CreateTagsRequest();
+        
         createTagsRequest_requests.setResources(spotInstanceRequestIds);
         createTagsRequest_requests.setTags(requestTags);
 
-        // Try to tag the Spot request submitted.
-        try {
-            ec2.createTags(createTagsRequest_requests);
-        } catch (AmazonServiceException e) {
-            // Write out any exceptions that may have occurred.
-            System.out.println("Error terminating instances");
-            System.out.println("Caught Exception: " + e.getMessage());
-            System.out.println("Reponse Status Code: " + e.getStatusCode());
-            System.out.println("Error Code: " + e.getErrorCode());
-            System.out.println("Request ID: " + e.getRequestId());
-        }
+        handleException(createTagsRequest_requests, ec2);
 
         //============================================================================================//
         //=========================== Determining the State of the Spot Request ======================//
@@ -228,18 +219,8 @@ public class InlineTaggingCodeSampleApp {
         createTagsRequest_instances.setResources(instanceIds);
         createTagsRequest_instances.setTags(instanceTags);
 
-        // Try to tag the Spot instance started.
-        try {
-            ec2.createTags(createTagsRequest_instances);
-        } catch (AmazonServiceException e) {
-            // Write out any exceptions that may have occurred.
-            System.out.println("Error terminating instances");
-            System.out.println("Caught Exception: " + e.getMessage());
-            System.out.println("Reponse Status Code: " + e.getStatusCode());
-            System.out.println("Error Code: " + e.getErrorCode());
-            System.out.println("Request ID: " + e.getRequestId());
-        }
-
+        handleException(createTagsRequest_instances, ec2);
+        
         //============================================================================================//
         //====================================== Canceling the Request ==============================//
         //============================================================================================//
@@ -274,5 +255,18 @@ public class InlineTaggingCodeSampleApp {
         }
 
     }
-
+    
+    private static void handleException(CreateTagsRequest createTagsRequest_requests, AmazonEC2 ec2) {
+        // Try to tag the Spot request submitted.
+        try {
+            ec2.createTags(createTagsRequest_requests);
+        } catch (AmazonServiceException e) {
+            // Write out any exceptions that may have occurred.
+            System.out.println("Error terminating instances");
+            System.out.println("Caught Exception: " + e.getMessage());
+            System.out.println("Reponse Status Code: " + e.getStatusCode());
+            System.out.println("Error Code: " + e.getErrorCode());
+            System.out.println("Request ID: " + e.getRequestId());
+        }
+    }
 }
