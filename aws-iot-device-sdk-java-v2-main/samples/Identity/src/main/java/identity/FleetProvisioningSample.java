@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class FleetProvisioningSample {
     static String clientId = "test-" + UUID.randomUUID().toString();
@@ -292,7 +293,7 @@ public class FleetProvisioningSample {
                 FleetProvisioningSample::onRegisterThingAccepted,
                 FleetProvisioningSample::onException);
 
-        subscribedRegisterAccepted.get();
+        subscribedRegisterAccepted.get(10, TimeUnit.SECONDS);
         System.out.println("Subscribed to SubscribeToRegisterThingAccepted");
 
         CompletableFuture<Integer> subscribedRegisterRejected = iotIdentityClient.SubscribeToRegisterThingRejected(
@@ -346,7 +347,7 @@ public class FleetProvisioningSample {
                 QualityOfService.AT_LEAST_ONCE,
                 FleetProvisioningSample::onCreateCertificateFromCsrResponseAccepted);
 
-        csrSubscribedAccepted.get();
+        csrSubscribedAccepted.get(10, TimeUnit.SECONDS);
         System.out.println("Subscribed to CreateCertificateFromCsrAccepted");
 
         CompletableFuture<Integer> csrSubscribedRejected = iotIdentityClient.SubscribeToCreateCertificateFromCsrRejected(
