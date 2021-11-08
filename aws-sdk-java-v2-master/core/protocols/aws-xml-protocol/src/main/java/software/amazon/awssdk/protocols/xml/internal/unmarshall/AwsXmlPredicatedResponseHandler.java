@@ -131,8 +131,6 @@ public class AwsXmlPredicatedResponseHandler<OutputT> implements HttpResponseHan
             SdkStandardLogger.REQUEST_LOGGER.debug(() -> "Received successful response: "
                                                          + parsedResponse.sdkHttpFullResponse().statusCode());
             return successResponseTransformer.apply(parsedResponse);
-        } catch (RetryableException e) {
-            throw e;
         } catch (Exception e) {
             if (e instanceof SdkException && ((SdkException) e).retryable()) {
                 throw (SdkException) e;
