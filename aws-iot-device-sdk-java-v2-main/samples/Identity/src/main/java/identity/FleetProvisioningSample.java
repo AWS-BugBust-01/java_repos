@@ -301,7 +301,7 @@ public class FleetProvisioningSample {
                 FleetProvisioningSample::onRejectedRegister,
                 FleetProvisioningSample::onException);
 
-        subscribedRegisterRejected.get();
+        subscribedRegisterRejected.get(15, TimeUnit.SECONDS);
         System.out.println("Subscribed to SubscribeToRegisterThingRejected");
 
         CompletableFuture<Integer> publishKeys = iotIdentityClient.PublishCreateKeysAndCertificate(
