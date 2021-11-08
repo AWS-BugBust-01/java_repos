@@ -249,8 +249,6 @@ public abstract class AbstractAwsSigner implements Signer {
                 return new ByteArrayInputStream(new byte[0]);
             }
             return streamProvider.newStream();
-        } catch (SdkClientException e) {
-            throw e;
         } catch (Exception e) {
             throw SdkClientException.builder()
                                     .message("Unable to read request payload to sign request: " + e.getMessage())
