@@ -32,7 +32,6 @@ import software.amazon.awssdk.core.internal.http.AmazonAsyncHttpClient;
 public class SdkAsyncClientHandler extends BaseAsyncClientHandler implements AsyncClientHandler {
 
     public SdkAsyncClientHandler(SdkClientConfiguration clientConfiguration) {
-        super(clientConfiguration, new AmazonAsyncHttpClient(clientConfiguration));
         SdkClientOptionValidation.validateAsyncClientOptions(clientConfiguration);
     }
 }
