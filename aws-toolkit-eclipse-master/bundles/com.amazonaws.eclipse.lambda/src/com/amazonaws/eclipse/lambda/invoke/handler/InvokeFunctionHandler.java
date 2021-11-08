@@ -279,17 +279,18 @@ public class InvokeFunctionHandler extends AbstractHandler {
     }
 
     private static void askForDeploymentFirst(IJavaElement selectedJavaElement) {
-        MessageDialog dialog = new MessageDialog(
+        try (MessageDialog dialog = new MessageDialog(
                 Display.getCurrent().getActiveShell(),
                 "Function not uploaded yet", null,
                 "You need to upload the function to Lambda before invoking it.",
                 MessageDialog.INFORMATION,
-                new String[] { "Upload now", "Cancel"}, 0);
-        int result = dialog.open();
+                new String[] { "Upload now", "Cancel"}, 0)) {
+            int result = dialog.open();
 
-        if (result == 0) {
-            LambdaAnalytics.trackUploadWizardOpenedBeforeFunctionInvoke();
-            UploadFunctionToLambdaCommandHandler.doUploadFunctionProjectToLambda(selectedJavaElement);
+            if (result == 0) {
+                LambdaAnalytics.trackUploadWizardOpenedBeforeFunctionInvoke();
+                UploadFunctionToLambdaCommandHandler.doUploadFunctionProjectToLambda(selectedJavaElement);
+            }
         }
     }
 
