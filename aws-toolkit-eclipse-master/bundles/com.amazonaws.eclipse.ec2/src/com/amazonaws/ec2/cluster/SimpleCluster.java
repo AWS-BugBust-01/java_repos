@@ -72,7 +72,7 @@ public class SimpleCluster extends Cluster {
             return constructor.newInstance(instance);
         } catch (Exception e) {
             throw new RuntimeException("Unable to create new application server object of type "
-                    + appServerClass.getName());
+                    + appServerClass.getName(), e);
         }
     }
 
