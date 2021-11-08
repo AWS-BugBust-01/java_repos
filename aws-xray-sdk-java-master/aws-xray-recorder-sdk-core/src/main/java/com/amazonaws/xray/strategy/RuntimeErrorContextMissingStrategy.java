@@ -31,7 +31,7 @@ public class RuntimeErrorContextMissingStrategy implements ContextMissingStrateg
         try {
             throw exceptionClass.getConstructor(String.class).newInstance(message);
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            throw new RuntimeException(message);
+            throw new RuntimeException(message, e);
         }
     }
 
