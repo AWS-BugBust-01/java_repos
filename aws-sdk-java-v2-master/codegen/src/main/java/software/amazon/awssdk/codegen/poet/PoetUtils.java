@@ -98,8 +98,6 @@ public final class PoetUtils {
     }
 
     public static ClassName classNameFromFqcn(String fqcn) {
-        String basePath = fqcn.substring(0, fqcn.lastIndexOf("."));
-        String className = fqcn.substring(fqcn.lastIndexOf(".") + 1);
         return ClassName.get(basePath, className);
     }
 
