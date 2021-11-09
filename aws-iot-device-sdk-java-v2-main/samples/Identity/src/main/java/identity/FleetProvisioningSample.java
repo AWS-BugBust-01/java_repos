@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class FleetProvisioningSample {
     static String clientId = "test-" + UUID.randomUUID().toString();
@@ -401,7 +402,7 @@ public class FleetProvisioningSample {
                 registerThingRequest,
                 QualityOfService.AT_LEAST_ONCE);
 
-        publishRegister.get();
+        publishRegister.get(10, TimeUnit.SECONDS);
         System.out.println("Published to RegisterThing");
 
         waitForRegisterRequest();
