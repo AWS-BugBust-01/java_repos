@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 public class JobsSample {
     static String clientId = "test-" + UUID.randomUUID().toString();
@@ -193,7 +194,7 @@ public class JobsSample {
 
                 CompletableFuture<Boolean> connected = connection.connect();
                 try {
-                    boolean sessionPresent = connected.get();
+                    boolean sessionPresent = connected.get(10, TimeUnit.SECONDS);
                     System.out.println("Connected to " + (!sessionPresent ? "new" : "existing") + " session!");
                 } catch (Exception ex) {
                     throw new RuntimeException("Exception occurred during connect", ex);
