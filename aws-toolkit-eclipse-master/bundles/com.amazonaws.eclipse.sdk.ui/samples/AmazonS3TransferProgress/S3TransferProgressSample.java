@@ -89,7 +89,7 @@ public class S3TransferProgressSample {
 
         AmazonS3 s3 = AmazonS3ClientBuilder.standard()
             .withCredentials(credentialsProvider)
-            .withRegion("us-west-2")
+            .withRegion(Regions.US_WEST_2)
             .build();
 
         tx = TransferManagerBuilder.standard()
