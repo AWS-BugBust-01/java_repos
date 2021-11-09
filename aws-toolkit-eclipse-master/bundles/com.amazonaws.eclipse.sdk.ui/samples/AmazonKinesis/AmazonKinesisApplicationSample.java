@@ -19,6 +19,7 @@ import java.util.UUID;
 import com.amazonaws.AmazonClientException;
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
+import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.kinesis.AmazonKinesis;
@@ -116,7 +117,7 @@ public final class AmazonKinesisApplicationSample {
         // Delete the stream
         AmazonKinesis kinesis = AmazonKinesisClientBuilder.standard()
             .withCredentials(credentialsProvider)
-            .withRegion("us-west-2")
+            .withRegion(Regions.US_WEST_2)
             .build();
 
         System.out.printf("Deleting the Amazon Kinesis stream used by the sample. Stream Name = %s.\n",
