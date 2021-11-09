@@ -30,6 +30,7 @@ import software.amazon.awssdk.iot.iotshadow.model.UpdateShadowSubscriptionReques
 import java.util.HashMap;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -258,7 +259,7 @@ public class ShadowSample {
                                 requestShadowDeltaUpdated,
                                 QualityOfService.AT_LEAST_ONCE,
                                 ShadowSample::onShadowDeltaUpdated);
-                subscribedToDeltas.get();
+                subscribedToDeltas.get(10, TimeUnit.SECONDS);
 
                 System.out.println("Subscribing to update respones...");
                 UpdateShadowSubscriptionRequest requestUpdateShadow = new UpdateShadowSubscriptionRequest();
