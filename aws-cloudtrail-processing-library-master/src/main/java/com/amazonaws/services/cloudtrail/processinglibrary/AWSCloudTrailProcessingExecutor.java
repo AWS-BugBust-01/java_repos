@@ -142,6 +142,7 @@ public class AWSCloudTrailProcessingExecutor {
                 threadPool.awaitTermination(config.getThreadTerminationDelaySeconds(), TimeUnit.SECONDS);
             } catch (InterruptedException e) {
                 logger.debug("Wait thread pool termination is interrupted.");
+                Thread.currentThread().interrupt();
             }
 
             if (!threadPool.isShutdown()) { // ShutdownNow after waiting
