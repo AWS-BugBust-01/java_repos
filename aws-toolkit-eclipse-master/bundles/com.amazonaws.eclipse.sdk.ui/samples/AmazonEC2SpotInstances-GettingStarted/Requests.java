@@ -77,7 +77,7 @@ public class Requests {
 
         ec2 = AmazonEC2ClientBuilder.standard()
             .withCredentials(new AWSStaticCredentialsProvider(credentials))
-            .withRegion("us-west-2")
+            .withRegion(Regions.US-WEST-2)
             .build();
     }
 
