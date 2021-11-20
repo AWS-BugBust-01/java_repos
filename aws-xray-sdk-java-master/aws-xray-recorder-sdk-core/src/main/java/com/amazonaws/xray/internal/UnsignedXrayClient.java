@@ -176,7 +176,7 @@ public class UnsignedXrayClient {
         try {
             return os.toString(StandardCharsets.UTF_8.name());
         } catch (UnsupportedEncodingException e) {
-            throw new IllegalStateException("UTF-8 not supported can't happen.");
+            throw new IllegalStateException("UTF-8 not supported can't happen.", e);
         }
     }
 
