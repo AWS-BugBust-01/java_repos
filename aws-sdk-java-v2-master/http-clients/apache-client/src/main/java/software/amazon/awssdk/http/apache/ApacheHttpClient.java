@@ -114,6 +114,7 @@ public final class ApacheHttpClient implements SdkHttpClient {
     private final ApacheHttpRequestConfig requestConfig;
     private final AttributeMap resolvedOptions;
 
+    // code change to fix the bug
     @SdkTestInternalApi
     ApacheHttpClient(ConnectionManagerAwareHttpClient httpClient,
                      ApacheHttpRequestConfig requestConfig,
